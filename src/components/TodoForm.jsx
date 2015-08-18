@@ -26,31 +26,44 @@ var TodoForm = React.createClass({
 
   _handleSubmit: function(e) {
     e.preventDefault();
-    TodoActions.create(this.state.name);
-    this.setState({ name: '' });
+    if (this.state.name.trim() != '') {
+      TodoActions.create(this.state.name);
+      this.setState({ name: '' });
+    }
   },
 
   // Rendering
   render: function() {
     return (
       <div className="todo-form">
-        <form onSubmit={ this._handleSubmit }>
-          <input
-            type="checkbox"
-            value={ this.state.allDone }
-            onChange={ this._handleCheckAll } />
-          <input
-            type="text"
-            value={ this.state.name }
-            onChange={ this._handleEdit } />
-          <input
-            type="submit"
-            value="Add"
-            onClick={ this._handleSubmit } />
-          <input
-            type="button"
-            value="Delete Completed"
-            onClick={ this._handleDeleteCompleted } />
+        <form className="form-inline" onSubmit={ this._handleSubmit }>
+          <div className="input-group">
+            <span className="input-group-addon">
+              <input
+                type="checkbox"
+                value={ this.state.allDone }
+                onChange={ this._handleCheckAll } />
+            </span>
+            <input
+              type="text"
+              className="form-control"
+              value={ this.state.name }
+              onChange={ this._handleEdit } />
+            <span className="input-group-btn">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={ this._handleSubmit }>
+                Add
+              </button>
+              <button
+                className="btn btn-danger"
+                value="Delete Completed"
+                onClick={ this._handleDeleteCompleted }>
+                Delete Completed
+              </button>
+            </span>
+          </div>
         </form>
       </div>
     );

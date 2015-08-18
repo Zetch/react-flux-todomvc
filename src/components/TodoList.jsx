@@ -36,9 +36,9 @@ var TodoList = React.createClass({
     }.bind(this));
 
     return (
-      <div className="todo-list">
+      <ul className="list-group todo-list">
         { items }
-      </div>
+      </ul>
     );
   }
 
