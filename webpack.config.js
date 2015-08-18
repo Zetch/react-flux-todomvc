@@ -3,6 +3,7 @@ var webpack = require('webpack');
 module.exports = {
 
   entry: [
+    'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
     './src/client.js'
   ],
@@ -20,6 +21,7 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
 
