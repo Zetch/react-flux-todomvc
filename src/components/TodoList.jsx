@@ -7,7 +7,7 @@ var TodoList = React.createClass({
 
   // Init
   getInitialState: function() {
-    return { items: TodoStore.getAll() };
+    return TodoStore.getState();
   },
 
   // Lifecycle
@@ -20,7 +20,7 @@ var TodoList = React.createClass({
 
   // Actions
   _onChange: function(e) {
-    this.setState({ items: TodoStore.getAll() });
+    this.setState(TodoStore.getState());
   },
 
   // Rendering
