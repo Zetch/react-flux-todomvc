@@ -1,12 +1,11 @@
-var TodoDispatcher = require('../dispatcher/TodoDispatcher');
-var TodoConstants = require('../constants/TodoConstants');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
+import TodoDispatcher from '../dispatcher/TodoDispatcher';
+import TodoConstants from '../constants/TodoConstants';
+import { EventEmitter } from 'events';
+import assign from 'object-assign';
 
 
-var CHANGE_EVENT = 'change';
-
-var _todos = {};
+const CHANGE_EVENT = 'change';
+let _todos = {};
 
 function create(text) {
   var id = Date.now();
@@ -34,23 +33,17 @@ function uncomplete(id) {
 }
 
 function toggleAll(state) {
-  Object.keys(_todos).forEach(function(key) {
-    _todos[key].done = state;
-  });
+  Object.keys(_todos).forEach(key => _todos[key].done = state);
 }
 
 function destroyCompleted() {
   Object.keys(_todos)
-    .filter(function(key) {
-      return _todos[key].done;
-    })
-    .forEach(function(key) {
-      delete _todos[key];
-    });
+    .filter(key => _todos[key].done)
+    .forEach(key => delete _todos[key]);
 }
 
 
-var TodoStore = assign({}, EventEmitter.prototype, {
+const TodoStore = assign({}, EventEmitter.prototype, {
 
   getState: function() {
     return { items: _todos };
@@ -119,4 +112,4 @@ var TodoStore = assign({}, EventEmitter.prototype, {
 
 });
 
-module.exports = TodoStore;
+export default TodoStore;

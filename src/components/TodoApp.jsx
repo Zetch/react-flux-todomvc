@@ -1,11 +1,11 @@
-var React = require('react');
-var TodoList = require('./TodoList');
-var TodoForm = require('./TodoForm');
+import React from 'react';
+import TodoList from './TodoList';
+import TodoForm from './TodoForm';
 
 
-var TodoApp = React.createClass({
+class TodoApp extends React.Component {
 
-  render: function() {
+  render() {
     return (
       <div className="container todo-app">
         <div className="row">
@@ -19,6 +19,6 @@ var TodoApp = React.createClass({
     );
   }
 
-});
+}
 
-module.exports = TodoApp;
+export default TodoApp;

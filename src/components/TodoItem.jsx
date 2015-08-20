@@ -1,56 +1,46 @@
-var React = require('react');
-var TodoActions = require('../actions/TodoActions');
+import React from 'react';
+import TodoActions from '../actions/TodoActions';
 
-var TodoItem = React.createClass({
 
-  // Check properties
-  propTypes: {
-    id: React.PropTypes.number.isRequired,
-    name: React.PropTypes.string.isRequired,
-    done: React.PropTypes.bool
-  },
+class TodoItem extends React.Component {
 
-  // Default values
-  getInitialState: function() {
-    return {
+  // Init
+  constructor(props) {
+    super(props);
+    this.state = {
       name: this.props.name,
       isEditable: false
     };
-  },
 
-  getDefaultProps: function() {
-    return {
-      done: false
-    }
-  },
-
-  // Lifecyle
-  // componentWillMount: function() {},
-  // componentWillReceiveProps: function(nextProps) {},
-  // componentWillUpdate: function(nextProps, nextState) {},
+    this._handleEdit = this._handleEdit.bind(this);
+    this._handleEditBlur = this._handleEditBlur.bind(this);
+    this._handleCheck = this._handleCheck.bind(this);
+    this._handleDelete = this._handleDelete.bind(this);
+    this._toggleEditor = this._toggleEditor.bind(this);
+  }
 
   // Actions
-  _handleEdit: function(e) {
+  _handleEdit(e) {
     this.setState({ name: e.target.value });
-  },
+  }
 
-  _handleEditBlur: function() {
+  _handleEditBlur() {
     this._toggleEditor();
-  },
+  }
 
-  _handleCheck: function() {
+  _handleCheck() {
     if (this.props.done) {
       TodoActions.uncomplete(this.props.id);
     } else {
       TodoActions.complete(this.props.id);
     }
-  },
+  }
 
-  _handleDelete: function() {
+  _handleDelete() {
     TodoActions.destroy(this.props.id);
-  },
+  }
 
-  _toggleEditor: function() {
+  _toggleEditor() {
     this.setState({
       isEditable: !this.state.isEditable
     }, function() {
@@ -60,11 +50,11 @@ var TodoItem = React.createClass({
         TodoActions.update(this.props.id, this.state.name);
       }
     });
-  },
+  }
 
 
   // Rendering
-  render: function() {
+  render() {
     if (!this.state.isEditable) {
       return (
         <li className="list-group-item todo-item">
@@ -98,6 +88,16 @@ var TodoItem = React.createClass({
     }
   }
 
-});
+}
 
-module.exports = TodoItem;
+TodoItem.propTypes = {
+  id: React.PropTypes.number.isRequired,
+  name: React.PropTypes.string.isRequired,
+  done: React.PropTypes.bool
+};
+
+TodoItem.defaultProps = {
+  done: false
+};
+
+export default TodoItem;

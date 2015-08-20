@@ -1,39 +1,44 @@
-var React = require('react');
-var TodoActions = require('../actions/TodoActions');
+import React from 'react';
+import TodoActions from '../actions/TodoActions';
 
 
-var TodoForm = React.createClass({
+class TodoForm extends React.Component {
 
   // Init
-  getInitialState: function() {
-    return { name: '', allDone: false };
-  },
+  constructor(props) {
+    super(props);
+    this.state = { name: '', allDone: false };
+    // Binding
+    this._handleCheckAll = this._handleCheckAll.bind(this);
+    this._handleEdit = this._handleEdit.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+  }
 
   // Actions
-  _handleCheckAll: function() {
+  _handleCheckAll() {
     this.setState({ allDone: !this.state.allDone }, function() {
       TodoActions.toggleAll(this.state.allDone);
     });
-  },
+  }
 
-  _handleDeleteCompleted: function() {
+  _handleDeleteCompleted() {
     TodoActions.destroyCompleted();
-  },
+  }
 
-  _handleEdit: function(e) {
+  _handleEdit(e) {
     this.setState({ name: e.target.value });
-  },
+  }
 
-  _handleSubmit: function(e) {
+  _handleSubmit(e) {
     e.preventDefault();
     if (this.state.name.trim() != '') {
       TodoActions.create(this.state.name);
       this.setState({ name: '' });
     }
-  },
+  }
 
   // Rendering
-  render: function() {
+  render() {
     return (
       <div className="todo-form">
         <form className="form-inline" onSubmit={ this._handleSubmit }>
@@ -69,6 +74,6 @@ var TodoForm = React.createClass({
     );
   }
 
-});
+}
 
-module.exports = TodoForm;
+export default TodoForm;

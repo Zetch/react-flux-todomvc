@@ -1,9 +1,10 @@
-var Dispatcher = require('flux').Dispatcher;
+import { Dispatcher } from 'flux';
 
-var TodoDispatcher = new Dispatcher();
+
+const TodoDispatcher = new Dispatcher();
 
 TodoDispatcher.handleViewAction = function(action) {
-  var payload = {
+  let payload = {
     source: 'VIEW_ACTION',
     action: action
   };
@@ -11,4 +12,4 @@ TodoDispatcher.handleViewAction = function(action) {
   this.dispatch(payload);
 };
 
-module.exports = TodoDispatcher;
+export default TodoDispatcher;

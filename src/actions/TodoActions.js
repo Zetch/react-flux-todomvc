@@ -1,8 +1,8 @@
-var TodoDispatcher = require('../dispatcher/TodoDispatcher');
-var TodoConstants = require('../constants/TodoConstants');
+import TodoDispatcher from '../dispatcher/TodoDispatcher';
+import TodoConstants from '../constants/TodoConstants';
 
 
-var TodoActions = {
+const TodoActions = {
 
   create: function(text) {
     console.info('CREATE');
@@ -62,4 +62,4 @@ var TodoActions = {
 
 };
 
-module.exports = TodoActions;
+export default TodoActions;

@@ -1,31 +1,33 @@
-var React = require('react');
-var TodoItem = require('./TodoItem');
-var TodoStore = require('../stores/TodoStore');
+import React from 'react';
+import TodoItem from './TodoItem';
+import TodoStore from '../stores/TodoStore';
 
 
-var TodoList = React.createClass({
+class TodoList extends React.Component {
 
   // Init
-  getInitialState: function() {
-    return TodoStore.getState();
-  },
+  constructor(props) {
+    super(props);
+    this.state = TodoStore.getState();
+    this._onChange = this._onChange.bind(this);
+  }
 
   // Lifecycle
-  componentDidMount: function() {
+  componentDidMount() {
     TodoStore.addChangeListener(this._onChange);
-  },
-  componentWillUnmount: function(nextProps, nextState) {
+  }
+  componentWillUnmount(nextProps, nextState) {
     TodoStore.removeChangeListener(this._onChange);
-  },
+  }
 
   // Actions
-  _onChange: function(e) {
+  _onChange(e) {
     this.setState(TodoStore.getState());
-  },
+  }
 
   // Rendering
-  render: function() {
-    var items = Object.keys(this.state.items).map(function(key) {
+  render() {
+    let items = Object.keys(this.state.items).map(key => {
       return (
         <TodoItem
           key={ key }
@@ -33,7 +35,7 @@ var TodoList = React.createClass({
           name={ this.state.items[key].name }
           done={ this.state.items[key].done } />
       );
-    }.bind(this));
+    });
 
     return (
       <ul className="list-group todo-list">
@@ -42,6 +44,6 @@ var TodoList = React.createClass({
     );
   }
 
-});
+}
 
-module.exports = TodoList;
+export default TodoList;
