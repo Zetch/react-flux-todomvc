@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
+import '../styles/app.css';
 
 
 class TodoApp extends React.Component {
@@ -8,13 +9,9 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div className="container todo-app">
-        <div className="row">
-          <div className="col-xs-6">
-            <h1>TodoList</h1>
-            <TodoForm />
-            <TodoList />
-          </div>
-        </div>
+        <h1>TodoApp</h1>
+        <TodoForm />
+        <TodoList />
       </div>
     );
   }
