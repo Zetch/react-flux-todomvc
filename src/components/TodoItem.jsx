@@ -4,31 +4,32 @@ import TodoActions from '../actions/TodoActions';
 
 class TodoItem extends React.Component {
 
-  // Init
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name,
-      isEditable: false
-    };
+  // Defaults
+  static propTypes = {
+    id: React.PropTypes.number.isRequired,
+    name: React.PropTypes.string.isRequired,
+    done: React.PropTypes.bool
+  };
 
-    this._handleEdit = this._handleEdit.bind(this);
-    this._handleEditBlur = this._handleEditBlur.bind(this);
-    this._handleCheck = this._handleCheck.bind(this);
-    this._handleDelete = this._handleDelete.bind(this);
-    this._toggleEditor = this._toggleEditor.bind(this);
-  }
+  static defaultProps = {
+    done: false
+  };
+
+  state = {
+    name: this.props.name,
+    isEditable: false
+  };
 
   // Actions
-  _handleEdit(e) {
+  _handleEdit = (e) => {
     this.setState({ name: e.target.value });
   }
 
-  _handleEditBlur() {
+  _handleEditBlur = () => {
     this._toggleEditor();
   }
 
-  _handleCheck() {
+  _handleCheck = () => {
     if (this.props.done) {
       TodoActions.uncomplete(this.props.id);
     } else {
@@ -36,11 +37,11 @@ class TodoItem extends React.Component {
     }
   }
 
-  _handleDelete() {
+  _handleDelete = () => {
     TodoActions.destroy(this.props.id);
   }
 
-  _toggleEditor() {
+  _toggleEditor = () => {
     this.setState({
       isEditable: !this.state.isEditable
     }, function() {
@@ -89,15 +90,5 @@ class TodoItem extends React.Component {
   }
 
 }
-
-TodoItem.propTypes = {
-  id: React.PropTypes.number.isRequired,
-  name: React.PropTypes.string.isRequired,
-  done: React.PropTypes.bool
-};
-
-TodoItem.defaultProps = {
-  done: false
-};
 
 export default TodoItem;

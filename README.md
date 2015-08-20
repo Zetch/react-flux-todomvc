@@ -2,7 +2,7 @@
 React + Flux sample app
 
 Sample app which includes:
-  * ES6 syntax
+  * ES6 syntax + ES7 class properties
   * React (UI rendering and user inputs)
   * Flux architecure (Data flows in one direction)
   * Webpack (Task manager: build and deploy)

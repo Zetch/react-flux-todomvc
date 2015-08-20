@@ -5,12 +5,8 @@ import TodoStore from '../stores/TodoStore';
 
 class TodoList extends React.Component {
 
-  // Init
-  constructor(props) {
-    super(props);
-    this.state = TodoStore.getState();
-    this._onChange = this._onChange.bind(this);
-  }
+  // Defaults
+  state = TodoStore.getState();
 
   // Lifecycle
   componentDidMount() {
@@ -21,7 +17,7 @@ class TodoList extends React.Component {
   }
 
   // Actions
-  _onChange(e) {
+  _onChange = (e) => {
     this.setState(TodoStore.getState());
   }
 

@@ -4,32 +4,25 @@ import TodoActions from '../actions/TodoActions';
 
 class TodoForm extends React.Component {
 
-  // Init
-  constructor(props) {
-    super(props);
-    this.state = { name: '', allDone: false };
-    // Binding
-    this._handleCheckAll = this._handleCheckAll.bind(this);
-    this._handleEdit = this._handleEdit.bind(this);
-    this._handleSubmit = this._handleSubmit.bind(this);
-  }
+  // Defaults
+  state = { name: '', allDone: false };
 
-  // Actions
-  _handleCheckAll() {
+    // Actions
+  _handleCheckAll = () => {
     this.setState({ allDone: !this.state.allDone }, function() {
       TodoActions.toggleAll(this.state.allDone);
     });
   }
 
-  _handleDeleteCompleted() {
+  _handleDeleteCompleted = () => {
     TodoActions.destroyCompleted();
   }
 
-  _handleEdit(e) {
+  _handleEdit = (e) => {
     this.setState({ name: e.target.value });
   }
 
-  _handleSubmit(e) {
+  _handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.name.trim() != '') {
       TodoActions.create(this.state.name);
