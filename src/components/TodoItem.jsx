@@ -68,7 +68,7 @@ class TodoItem extends React.Component {
           </span>
           <button
             type="button"
-            className="btn btn-default btn-xs pull-right"
+            className="btn btn-danger btn-xs pull-right"
             onClick={ this._handleDelete }>
             <span>&times;</span>
           </button>

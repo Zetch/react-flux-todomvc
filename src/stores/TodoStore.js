@@ -46,7 +46,7 @@ function destroyCompleted() {
 const TodoStore = assign({}, EventEmitter.prototype, {
 
   getState: function() {
-    return { items: _todos };
+    return _todos ;
   },
 
   emitChange: function() {
